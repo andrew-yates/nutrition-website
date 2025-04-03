@@ -1,0 +1,47 @@
+---
+interface Props {
+    componentId: string;
+}
+const {componentId} = Astro.props;
+---
+<style>
+  input {
+    font-size: x-large;
+  }
+</style>
+<div>
+    <label for="date">Day to edit:</label>
+
+    <input
+      type="date"
+      id={componentId}
+      class="date-picker"
+      name="date-to-edit"
+      value="2018-07-22"
+      min="2025-01-01"
+      max="2030-12-31" />
+      <span> (today)</span>
+</div>
+
+<script>
+    const dateInputs = document.querySelectorAll(".date-picker") as NodeListOf<HTMLInputElement>;
+    dateInputs.forEach(dateInput => {
+        dateInput.addEventListener('change', () => {
+            const inputVal = dateInput.value;
+            const currentDate = new Date().toLocaleDateString('en-CA')
+            const inputId = dateInput.id;
+            const todayInputLabel = document.querySelector(`#${inputId} + span`) as HTMLSpanElement;
+            if (!todayInputLabel) {
+                return;
+            }
+            if (inputVal === currentDate) {
+                todayInputLabel.style.display = "inline-block";
+            }
+            else {
+                todayInputLabel.style.display = "none";
+            }
+        });
+        
+        dateInput.value = new Date().toLocaleDateString('en-CA');
+    })
+</script>

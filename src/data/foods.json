@@ -1,0 +1,16 @@
+[
+    {
+        "foodName": "peas",
+        "units": [
+            {"unitName": "cup", "protein": 8},
+            {"unitName": "g", "protein": 0.05}
+        ]
+    },
+    {
+        "foodName": "egg",
+        "units": [
+            {"unitName": "egg", "protein": 6},
+            {"unitName": "g", "protein": 0.13}
+        ]
+    }
+]
