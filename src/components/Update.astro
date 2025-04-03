@@ -3,20 +3,6 @@ import DatePicker from "./DatePicker.astro";
 import DailyFood from "./DailyFood.svelte";
 
 import foodsData from "../data/foods.json";
-
-interface Map {
-  [key: string]: FoodQuantity | undefined
-}
-
-interface FoodQuantity {
-  "unitName" : string,
-  "quantity" : number,
-}
-
-const foodAmounts: Map = {
-  "peas": {"unitName": "cup", "quantity": 3}
-};
-
 ---
 
 <DatePicker componentId="date-to-modify-picker"/>

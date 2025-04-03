@@ -1,7 +1,6 @@
 <script lang="ts">
   let {foodName, units, quantity, quantityUnit, onQuantityUpdate, onUnitUpdate} = $props();
 
-
   let selectedUnitProtein = $derived(quantityUnit.protein * quantity)
 </script>
 
@@ -28,6 +27,6 @@
     </select>
   </div>
   <div>
-    {Math.round(selectedUnitProtein)}
+    {Math.round(selectedUnitProtein)}g
   </div>
 </li>

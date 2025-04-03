@@ -27,10 +27,6 @@
     quantity: number;
   }
 
-  // Todo: pull from localStorage and update localStorage
-  // let dailyFoodAmounts: FoodHistory = $state({
-  //   "2025-04-02": {"peas": {"unitName": "g", "quantity": 200}, "egg": {"unitName": "egg", "quantity": 2}}
-  // });
   let dailyFoodAmounts: FoodHistory = $state(JSON.parse(localStorage.getItem("dailyFoodAmounts") || "{}"));
   let foodAmounts = $derived(dailyFoodAmounts[date] ?? {});
 
@@ -61,6 +57,10 @@
   const updateLocalStorage = () => localStorage.setItem("dailyFoodAmounts", JSON.stringify(dailyFoodAmounts));
 
   let unitNameToUnit = (foodName: string, unitName: string) => foods.find(f => f.foodName === foodName).units.find(u => u.unitName === unitName)
+
+  let totalProtein = $derived(Math.round(foods
+    .map(food => unitNameToUnit(food.foodName, foodAmounts[food.foodName]?.unitName ?? food.units[0].unitName).protein * (foodAmounts[food.foodName]?.quantity ?? 0))
+    .reduce((partialSum, a) => partialSum + a, 0)));
 </script>
 
 <style>
@@ -80,4 +80,7 @@
       onUnitUpdate={onUnitUpdate(date)(food.foodName)} />
   {/each}
 </ul>
+<p>
+  total protein: {totalProtein}g
+</p>
 
